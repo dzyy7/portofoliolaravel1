@@ -17,7 +17,7 @@
                         Kerja Cepat, Hasil Tepat, Profit Meningkat Berkat Aplikasi yang Tepat
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="{{ route('kontak') }}"
+                        <a href="https://wa.me/628122811535"
                             class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105 flex items-center justify-center">
                             <i class="fab fa-whatsapp mr-2"></i>
                             Konsultasi Gratis
