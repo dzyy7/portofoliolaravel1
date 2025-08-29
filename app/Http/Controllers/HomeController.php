@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PortofolioModel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,37 +27,12 @@ class HomeController extends Controller
             ]
         ];
 
-        $portofolio = [
-            [
-                'title' => 'Sistem Manajemen Siswa',
-                'description' => 'web manajemen siswa satu sekolah terintegrasi',
-                'image' => 'https://dzyy7.github.io/personalweb/asset/student-data.png',
-                'tech' => ['Laravel', 'MySQL']
-            ],
-            [
-                'title' => 'Playvies',
-                'description' => 'Aplikasi ini menampilkan koleksi film, dan pengguna dapat menambahkan film ke daftar favorit.',
-                'image' => 'https://dzyy7.github.io/personalweb/asset/Playvies.png',
-                'tech' => ['Flutter', 'Dart']
-            ],
-            [
-                'title' => 'Animeku',
-                'description' => 'Aplikasi untuk menampilkan data anime, Memungkinkan pengguna untuk menjelajahi dan menemukan berbagai judul dengan antarmuka yang bersih dan responsif.',
-                'image' => 'https://dzyy7.github.io/personalweb/asset/Animeku.jpeg',
-                'tech' => ['Flutter', 'Rest API', 'Dart']
-            ]
-        ];
+        $portofolio = PortofolioModel::latest(3);
 
         return view('home', compact('layanan', 'portofolio'));
     }
 
-    public function layanan()
-    {
-        return view('layanan');
-    }
 
-    public function portofolio()
-    {
-        return view('portofolio');
-    }
+
+
 }
