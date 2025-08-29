@@ -232,38 +232,203 @@
     <section id="portofolio" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Portofolio Kami
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 ">
+                    <a href="/portofolio"class="hover:text-blue-600 transition-colors duration-300">
+                        Portofolio Kami
+                    </a>
                 </h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                     Lihat berbagai proyek sukses yang telah kami kerjakan untuk klien
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($portofolio as $project)
-                    <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 bg-cover bg-center" style="background-image: url('{{ $project['image'] }}')">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $project['title'] }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $project['description'] }}</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                @foreach ($project['tech'] as $tech)
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
-                                        {{ $tech }}
-                                    </span>
-                                @endforeach
+            <!-- Portfolio Slider -->
+            <div class="relative max-w-6xl mx-auto">
+                <!-- Slider Container -->
+                <div class="portfolio-slider overflow-hidden rounded-2xl shadow-2xl">
+                    <div class="portfolio-track flex transition-transform duration-500 ease-in-out" id="portfolioTrack">
+                        @foreach ($portofolio as $index => $project)
+                            <div class="portfolio-slide w-full flex-shrink-0">
+                                <div class="bg-white rounded-2xl overflow-hidden h-full">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 h-full min-h-[500px]">
+                                        <!-- Image Section -->
+                                        <div class="relative overflow-hidden">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 z-10">
+                                            </div>
+                                            <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}"
+                                                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700">
+                                            <div class="absolute top-4 left-4 z-20">
+                                                <span
+                                                    class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                                                    Proyek {{ $index + 1 }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Content Section -->
+                                        <div class="p-8 lg:p-12 flex flex-col justify-center">
+                                            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                                                {{ $project['title'] }}
+                                            </h3>
+                                            <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                                                {{ $project['description'] }}
+                                            </p>
+
+                                            <!-- Tech Stack -->
+                                            <div class="mb-8">
+                                                <h4
+                                                    class="text-sm font-semibold text-gray-800 mb-3 uppercase tracking-wider">
+                                                    Teknologi yang Digunakan
+                                                </h4>
+                                                <div class="flex flex-wrap gap-2">
+                                                    @foreach ($project['tech'] as $tech)
+                                                        <span
+                                                            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm px-4 py-2 rounded-full font-medium shadow-lg">
+                                                            {{ $tech }}
+                                                        </span>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                            <!-- CTA Button -->
+                                            <div class="flex space-x-4">
+                                                <a href="{{ route('kontak') }}"
+                                                    class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
+                                                    Diskusi Proyek Serupa
+                                                    <i class="fas fa-arrow-right ml-2"></i>
+                                                </a>
+                                                <a href="https://wa.me/628122811535"
+                                                    class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 flex items-center">
+                                                    <i class="fab fa-whatsapp mr-2"></i>
+                                                    WhatsApp
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="{{ route('kontak') }}"
-                                class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
-                                Hubungi Kami
-                                <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
+                <button id="prevBtn"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 w-12 h-12 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 z-20 flex items-center justify-center group">
+                    <i class="fas fa-chevron-left group-hover:-translate-x-1 transition-transform duration-300"></i>
+                </button>
+
+                <button id="nextBtn"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 w-12 h-12 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 z-20 flex items-center justify-center group">
+                    <i class="fas fa-chevron-right group-hover:translate-x-1 transition-transform duration-300"></i>
+                </button>
+
+                <div class="flex justify-center mt-8 space-x-2" id="paginationDots">
+                    @foreach ($portofolio as $index => $project)
+                        <button
+                            class="pagination-dot w-3 h-3 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-gradient-to-r from-blue-500 to-purple-600' : 'bg-gray-300' }}"
+                            data-slide="{{ $index }}"></button>
+                    @endforeach
+                </div>
+
+                <div class="mt-4 mx-auto max-w-md">
+                    <div class="w-full bg-gray-200 rounded-full h-1">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-1 rounded-full transition-all duration-500"
+                            id="progressBar" style="width: {{ 100 / count($portofolio) }}%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">
+                    Ingin melihat lebih banyak proyek kami atau mendiskusikan kebutuhan spesifik Anda?
+                </p>
+                <a href="{{ route('kontak') }}"
+                    class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    Konsultasi Proyek Anda
+                </a>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('portfolioTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.pagination-dot');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = {{ count($portofolio) }};
+            let currentSlide = 0;
+
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-600');
+                    } else {
+                        dot.classList.add('bg-gray-300');
+                        dot.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600');
+                    }
+                });
+
+                const progressWidth = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressWidth}%`;
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                });
+            });
+
+            setInterval(nextSlide, 8000);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+
+            let startX = null;
+
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            track.addEventListener('touchend', (e) => {
+                if (!startX) return;
+
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+
+                startX = null;
+            });
+        });
+    </script>
+
+    <style>
+
+    </style>
 @endsection

@@ -22,8 +22,8 @@
                        class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
                         Layanan
                     </a>
-                    <a href="{{ route('home') }}#portofolio"
-                       class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+                    <a href="{{ route('portofolio') }}"
+                       class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('portofolio*') ? 'text-blue-600 border-b-2 border-blue-600' : '' }}">
                         Portofolio
                     </a>
                     <a href="{{ route('kontak') }}"
@@ -59,7 +59,7 @@
                    class="block text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium">
                     Layanan
                 </a>
-                <a href="{{ route('home') }}#portofolio"
+                <a href="{{ route('portofolio') }}"
                    class="block text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium">
                     Portofolio
                 </a>
@@ -75,30 +75,42 @@
         </div>
     </nav>
 </header>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a[href^='{{ route('home') }}#']");
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    function activateNavLink() {
-        let scrollY = window.pageYOffset;
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
 
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 80; // header height
-            const sectionId = current.getAttribute("id");
+    // Active navigation for section scrolling (only on home page)
+    if (window.location.pathname === '/') {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll("nav a[href^='{{ route('home') }}#']");
 
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
-                    if (link.getAttribute("href").includes("#" + sectionId)) {
-                        link.classList.add("text-blue-600", "border-b-2", "border-blue-600");
-                    }
-                });
-            }
-        });
+        function activateNavLink() {
+            let scrollY = window.pageYOffset;
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 80; // header height
+                const sectionId = current.getAttribute("id");
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                        if (link.getAttribute("href").includes("#" + sectionId)) {
+                            link.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener("scroll", activateNavLink);
     }
-
-    window.addEventListener("scroll", activateNavLink);
 });
 </script>
