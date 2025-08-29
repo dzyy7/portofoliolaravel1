@@ -44,7 +44,7 @@ class PortofolioModel extends Model
             [
                 'id' => 4,
                 'title' => 'AnimekuPlay',
-                'description' => 'Aplikasi untuk menonton anime dengan antarmuka yang bersih dan responsif',
+                'description' => 'Aplikasi untuk menonton anime',
                 'image' => 'https://raw.githubusercontent.com/dzyy7/personalweb/refs/heads/main/asset/AnimekuPlay.png',
                 'tech' => ['Flutter', 'Dart', 'Rest API'],
                 'category' => 'Mobile Application',

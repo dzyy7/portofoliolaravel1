@@ -4,15 +4,16 @@
 
 @section('content')
     <!-- Contact Hero Section -->
-    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-purple-600">
+    <section class="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 pt-24 pb-20">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                    Hubungi Kami
+            <div class="text-center text-white max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                    Hubungi <span class="text-yellow-400">Kami</span>
                 </h1>
-                <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+                <p class="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
                     Siap membantu mewujudkan solusi digital terbaik untuk bisnis Anda
                 </p>
+
             </div>
         </div>
     </section>
@@ -238,7 +239,6 @@
                 </p>
             </div>
 
-            <!-- Google Maps Embed -->
             <div class="rounded-2xl overflow-hidden shadow-lg h-96">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.744769324396!2d110.34711557484466!3d-7.816818492203836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a577faf968e75%3A0x2f1089d3e54a4fdb!2sJMC%20Indonesia!5e0!3m2!1sid!2sid!4v1756384755376!5m2!1sid!2sid"
@@ -251,12 +251,10 @@
 
     @push('scripts')
         <script>
-            // Form validation and enhancement
             document.addEventListener('DOMContentLoaded', function() {
                 const form = document.querySelector('form');
                 const inputs = form.querySelectorAll('input, textarea, select');
 
-                // Add focus/blur animations
                 inputs.forEach(input => {
                     input.addEventListener('focus', function() {
                         this.parentElement.classList.add('focused');
@@ -269,7 +267,6 @@
                     });
                 });
 
-                // Form submission with loading state
                 form.addEventListener('submit', function(e) {
                     const submitBtn = form.querySelector('button[type="submit"]');
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengirim...';
