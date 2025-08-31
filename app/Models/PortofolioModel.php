@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PortofolioModel extends Model
+class PortofolioModel 
 {
-    public static function allPortofolios(){
+    public static function all(){
         return [
             [
                 'id' => 1,
@@ -79,13 +79,13 @@ class PortofolioModel extends Model
 
     public static function find($id)
     {
-        $portofolio = collect(self::allPortofolios());
+        $portofolio = collect(self::all());
         return $portofolio->firstWhere('id', $id);
     }
 
     public static function latest($limit = null)
     {
-        $portofolio = collect(self::allPortofolios());
+        $portofolio = collect(self::all());
 
         if ($limit) {
             return $portofolio->take($limit)->all();
@@ -96,7 +96,7 @@ class PortofolioModel extends Model
 
     public static function byCategory($category)
     {
-        $portofolio = collect(self::allPortofolios());
+        $portofolio = collect(self::all());
         return $portofolio->where('category', $category)->all();
     }
 }

@@ -9,7 +9,7 @@ class PortofolioController extends Controller
     {
     public function index()
     {
-        $portofolio = PortofolioModel::allPortofolios();
+        $portofolio = PortofolioModel::all();
         $categories = array_unique(array_column($portofolio, 'category'));
 
         return view('portofolio', compact('portofolio', 'categories'));
@@ -24,7 +24,7 @@ class PortofolioController extends Controller
         }
 
         // Ambil proyek terkait (selain proyek yang sedang dilihat)
-        $relatedProjects = collect(PortofolioModel::allPortofolios())
+        $relatedProjects = collect(PortofolioModel::all())
             ->reject(function($item) use ($id) {
                 return $item['id'] == $id;
             })

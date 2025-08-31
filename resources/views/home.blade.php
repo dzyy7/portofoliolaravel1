@@ -234,7 +234,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 ">
                     <a href="/portofolio"class="hover:text-blue-600 transition-colors duration-300">
-                        Portofolio Kami
+                        Portofolio Kami &raquo;
                     </a>
                 </h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
